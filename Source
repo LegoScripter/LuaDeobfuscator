@@ -1,0 +1,33 @@
+if DeobfuscationType == 1 then
+    local OldLoadstring = loadstring
+    loadstring = function(string)
+        if PrintScript == true then
+            print(string)
+        end
+        if CopyScript == true then
+            setclipboard(string)
+        end
+        if RunScript == true then
+            return OldLoadstring(string)
+        else
+            warn('IGNORE THIS ERROR BELOW!')
+        end
+    end
+end
+if DeobfuscationType == 2 then
+    setreadonly(table, false)
+    local OldConcat = table.concat
+    table.concat = function(string)
+        if PrintScript == true then
+            print(OldConcat(string))
+        end
+        if CopyScript == true then
+            setclipboard(OldConcat(string))
+        end
+        if RunScript == true then
+            return OldConcat(string)
+        else
+            warn('IGNORE THIS ERROR BELOW!')
+        end
+    end
+end
